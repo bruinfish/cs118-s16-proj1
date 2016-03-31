@@ -8,17 +8,17 @@ CLIENT = web-client
 
 all: $(SERVER) $(CLIENT)
 
-$(SERVER).o:
+$(SERVER).o: $(SERVER).cpp
 	$(CC) $(CFLAGS) $(SERVER).cpp
 
-$(CLIENT).o:
+$(CLIENT).o: $(CLIENT).cpp
 	$(CC) $(CFLAGS) $(CLIENT).cpp
 
 $(SERVER): $(OBJS) $(SERVER).o
-	$(CC) $(LFLAGS) $(OBJS) $(SERVER).o -o $(SERVER)
+	$(CC) $(OBJS) $(SERVER).o -o $(SERVER) $(LFLAGS)
 
 $(CLIENT): $(OBJS) $(CLIENT).o
-	$(CC) $(LFLAGS) $(OBJS) $(CLIENT).o -o $(CLIENT)
+	$(CC) $(OBJS) $(CLIENT).o -o $(CLIENT) $(LFLAGS)
 
 clean:
-	rm *.o $(SERVER) $(CLIENT)
+	rm -rf *.o $(SERVER) $(CLIENT)
